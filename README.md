@@ -4,7 +4,9 @@
 
 **A RESTful Task Management API built with FastAPI, PostgreSQL, and JWT authentication**
 
-[Live Demo](https://your-demo-url.com) · [API Docs](https://your-demo-url.com/docs) · [Report Bug](https://github.com/yourusername/taskflow-api/issues) · [Request Feature](https://github.com/yourusername/taskflow-api/issues)
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white) ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-4169E1?style=for-the-badge&logo=postgresql&logoColor=white) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
+[Live Demo](https://your-demo-url.com) · [API Docs](https://your-demo-url.com/docs) · [Report Bug](https://github.com/ZaudRehman/taskflow-api/issues) · [Request Feature](https://github.com/yourusername/taskflow-api/issues)
 
 </div>
 

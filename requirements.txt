@@ -3,8 +3,14 @@ uvicorn[standard]
 sqlalchemy
 alembic
 psycopg2-binary
+<<<<<<< HEAD
 python-jose[cryptography]
 passlib[bcrypt]
+=======
+asyncpg
+python-jose[cryptography]
+bcrypt
+>>>>>>> efefeeb (Working API + Frontend)
 python-multipart
 pydantic
 pydantic-settings

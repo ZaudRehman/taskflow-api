@@ -2,7 +2,11 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sess
 from config.settings import settings
 from typing import AsyncGenerator
 
+<<<<<<< HEAD
 # Create async engine with connection pooling
+=======
+# Create async engine with connection pooling and disabled statement cache
+>>>>>>> efefeeb (Working API + Frontend)
 engine = create_async_engine(
     settings.DATABASE_URL,
     echo=settings.DEBUG,
@@ -10,6 +14,13 @@ engine = create_async_engine(
     pool_size=5,
     max_overflow=10,
     pool_pre_ping=True,
+<<<<<<< HEAD
+=======
+    connect_args={
+        "statement_cache_size": 0,  # Disable prepared statement cache
+        "prepared_statement_cache_size": 0,  # Additional safety
+    }
+>>>>>>> efefeeb (Working API + Frontend)
 )
 
 # Create async session factory

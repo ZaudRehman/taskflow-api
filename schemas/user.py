@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from pydantic import BaseModel, EmailStr, Field, ConfigDict
+=======
+from pydantic import BaseModel, EmailStr, Field, ConfigDict, field_validator
+>>>>>>> efefeeb (Working API + Frontend)
 from uuid import UUID
 from datetime import datetime
 from typing import Optional
@@ -13,6 +17,23 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str = Field(..., min_length=8, max_length=100)
+<<<<<<< HEAD
+=======
+    
+    @field_validator('password')
+    @classmethod
+    def validate_password(cls, v: str) -> str:
+        """Validate password meets security requirements."""
+        if len(v) < 8:
+            raise ValueError('Password must be at least 8 characters long')
+        if not any(char.isupper() for char in v):
+            raise ValueError('Password must contain at least one uppercase letter')
+        if not any(char.isdigit() for char in v):
+            raise ValueError('Password must contain at least one number')
+        if not any(char in '!@#$%^&*()_+-=[]{}|;:,.<>?' for char in v):
+            raise ValueError('Password must contain at least one special character')
+        return v
+>>>>>>> efefeeb (Working API + Frontend)
 
 
 class UserResponse(UserBase):
