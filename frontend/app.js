@@ -1,5 +1,9 @@
 // API Configuration
-const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
+// API Configuration
+const API_BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://127.0.0.1:8000/api/v1'
+    : `${window.location.origin}/api/v1`;
+
 let accessToken = localStorage.getItem('accessToken');
 let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 let categories = [];
