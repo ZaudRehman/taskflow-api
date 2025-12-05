@@ -211,6 +211,23 @@ input:focus, textarea:focus, select:focus {
     gap: 16px;
 }
 
+/* Color Input Styling */
+input[type="color"] {
+    height: 56px;
+    cursor: pointer;
+    padding: 6px;
+    border: 2px solid var(--primary);
+    background: white;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: 2px solid var(--primary);
+}
+
 /* Brutal Buttons */
 .btn {
     padding: 14px 28px;
@@ -322,6 +339,7 @@ input:focus, textarea:focus, select:focus {
     backdrop-filter: blur(10px);
     border: 2px solid var(--primary);
     margin-bottom: 24px;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
 }
 
 #user-name {
@@ -338,6 +356,7 @@ input:focus, textarea:focus, select:focus {
     padding: 28px;
     border: 2px solid var(--primary);
     margin-bottom: 24px;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
 }
 
 .card h2 {
@@ -351,7 +370,7 @@ input:focus, textarea:focus, select:focus {
 /* Filters - Clean and Functional */
 .filters {
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 16px;
     margin-bottom: 24px;
 }
@@ -403,6 +422,7 @@ input:focus, textarea:focus, select:focus {
     display: flex;
     gap: 8px;
     flex-shrink: 0;
+    flex-wrap: wrap;
 }
 
 .badge {

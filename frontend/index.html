@@ -47,7 +47,7 @@
             <div id="auth-message" class="message"></div>
         </div>
 
-        <!-- Main App Section (Tasks) -->
+        <!-- Main App Section -->
         <div id="app-section" class="section" style="display: none;">
             <!-- User Info -->
             <div class="user-info">
@@ -55,59 +55,106 @@
                 <button onclick="logout()" class="btn btn-secondary">Logout</button>
             </div>
 
-            <!-- Create Task Form -->
-            <div class="card">
-                <h2>Create New Task</h2>
-                <form id="task-form">
-                    <input type="text" id="task-title" placeholder="Task Title" required>
-                    <textarea id="task-description" placeholder="Task Description" rows="3"></textarea>
-                    
-                    <div class="form-row">
-                        <select id="task-priority">
-                            <option value="LOW">Low Priority</option>
-                            <option value="MEDIUM" selected>Medium Priority</option>
-                            <option value="HIGH">High Priority</option>
-                            <option value="URGENT">Urgent</option>
-                        </select>
+            <!-- Tabs for Tasks and Categories -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('tasks')">Tasks</button>
+                <button class="tab-btn" onclick="showTab('categories')">Categories</button>
+            </div>
 
-                        <select id="task-status">
-                            <option value="TODO" selected>To Do</option>
-                            <option value="IN_PROGRESS">In Progress</option>
-                            <option value="COMPLETED">Completed</option>
-                        </select>
+            <!-- Tasks Tab -->
+            <div id="tasks-tab" class="tab-content active">
+                <!-- Create Task Form -->
+                <div class="card">
+                    <h2>Create New Task</h2>
+                    <form id="task-form">
+                        <input type="text" id="task-title" placeholder="Task Title" required>
+                        <textarea id="task-description" placeholder="Task Description" rows="3"></textarea>
+                        
+                        <div class="form-row">
+                            <select id="task-priority">
+                                <option value="LOW">Low Priority</option>
+                                <option value="MEDIUM" selected>Medium Priority</option>
+                                <option value="HIGH">High Priority</option>
+                                <option value="URGENT">Urgent</option>
+                            </select>
+
+                            <select id="task-status">
+                                <option value="TODO" selected>To Do</option>
+                                <option value="IN_PROGRESS">In Progress</option>
+                                <option value="COMPLETED">Completed</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <input type="datetime-local" id="task-due-date" placeholder="Due Date">
+                            
+                            <select id="task-category">
+                                <option value="">No Category</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Add Task</button>
+                    </form>
+                </div>
+
+                <!-- Filters -->
+                <div class="filters">
+                    <select id="filter-status" onchange="loadTasks()">
+                        <option value="">All Status</option>
+                        <option value="TODO">To Do</option>
+                        <option value="IN_PROGRESS">In Progress</option>
+                        <option value="COMPLETED">Completed</option>
+                    </select>
+
+                    <select id="filter-priority" onchange="loadTasks()">
+                        <option value="">All Priorities</option>
+                        <option value="LOW">Low</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="HIGH">High</option>
+                        <option value="URGENT">Urgent</option>
+                    </select>
+
+                    <select id="filter-category" onchange="loadTasks()">
+                        <option value="">All Categories</option>
+                    </select>
+
+                    <input type="text" id="search-input" placeholder="Search tasks..." onkeyup="debounceSearch()">
+                </div>
+
+                <!-- Tasks List -->
+                <div class="card">
+                    <h2>My Tasks</h2>
+                    <div id="tasks-container">
+                        <p class="loading">Loading tasks...</p>
                     </div>
-
-                    <input type="datetime-local" id="task-due-date" placeholder="Due Date">
-                    
-                    <button type="submit" class="btn btn-primary">Add Task</button>
-                </form>
+                </div>
             </div>
 
-            <!-- Filters -->
-            <div class="filters">
-                <select id="filter-status" onchange="loadTasks()">
-                    <option value="">All Status</option>
-                    <option value="TODO">To Do</option>
-                    <option value="IN_PROGRESS">In Progress</option>
-                    <option value="COMPLETED">Completed</option>
-                </select>
+            <!-- Categories Tab -->
+            <div id="categories-tab" class="tab-content">
+                <!-- Create Category Form -->
+                <div class="card">
+                    <h2>Create New Category</h2>
+                    <form id="category-form">
+                        <input type="text" id="category-name" placeholder="Category Name" required maxlength="100">
+                        
+                        <div class="form-row">
+                            <input type="color" id="category-color" value="#6366f1" title="Choose category color">
+                            <input type="text" placeholder="Color Preview" value="#6366f1" disabled style="text-align: center; font-weight: 700;">
+                        </div>
+                        
+                        <textarea id="category-description" placeholder="Category Description (optional)" rows="3"></textarea>
+                        
+                        <button type="submit" class="btn btn-primary">Add Category</button>
+                    </form>
+                </div>
 
-                <select id="filter-priority" onchange="loadTasks()">
-                    <option value="">All Priorities</option>
-                    <option value="LOW">Low</option>
-                    <option value="MEDIUM">Medium</option>
-                    <option value="HIGH">High</option>
-                    <option value="URGENT">Urgent</option>
-                </select>
-
-                <input type="text" id="search-input" placeholder="Search tasks..." onkeyup="debounceSearch()">
-            </div>
-
-            <!-- Tasks List -->
-            <div class="card">
-                <h2>My Tasks</h2>
-                <div id="tasks-container">
-                    <p class="loading">Loading tasks...</p>
+                <!-- Categories List -->
+                <div class="card">
+                    <h2>My Categories</h2>
+                    <div id="categories-container">
+                        <p class="loading">Loading categories...</p>
+                    </div>
                 </div>
             </div>
 
@@ -116,5 +163,15 @@
     </div>
 
     <script src="app.js"></script>
+    <script>
+        // Color picker sync
+        const colorInput = document.getElementById('category-color');
+        if (colorInput) {
+            colorInput.addEventListener('input', (e) => {
+                const preview = e.target.parentElement.querySelector('input[disabled]');
+                if (preview) preview.value = e.target.value;
+            });
+        }
+    </script>
 </body>
 </html>
