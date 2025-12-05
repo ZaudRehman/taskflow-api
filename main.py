@@ -1,26 +1,15 @@
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
-<<<<<<< HEAD
-from slowapi.middleware import SlowAPIMiddleware
-=======
->>>>>>> efefeeb (Working API + Frontend)
 from api.v1.router import api_router
 from config.settings import settings
 from database.base import Base
 from database.session import engine
-<<<<<<< HEAD
-import logging
-=======
 from utils.rate_limiter import limiter
 import logging
 from datetime import datetime
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-import os
->>>>>>> efefeeb (Working API + Frontend)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -35,13 +24,10 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-<<<<<<< HEAD
-=======
 # Add rate limiter to app state
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
->>>>>>> efefeeb (Working API + Frontend)
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
@@ -51,16 +37,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-<<<<<<< HEAD
-# Add rate limiting middleware
-from utils.rate_limiter import limiter
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-app.add_middleware(SlowAPIMiddleware)
-
-=======
->>>>>>> efefeeb (Working API + Frontend)
-# Include routers
+# Include API routers
 app.include_router(api_router, prefix=settings.API_V1_PREFIX)
 
 
@@ -88,12 +65,8 @@ async def root():
         "message": "Welcome to TaskFlow API",
         "version": settings.VERSION,
         "docs": "/docs",
-<<<<<<< HEAD
-        "redoc": "/redoc"
-=======
         "redoc": "/redoc",
         "app": "/app"
->>>>>>> efefeeb (Working API + Frontend)
     }
 
 
@@ -104,6 +77,25 @@ async def health_check():
         "status": "healthy",
         "version": settings.VERSION
     }
+
+
+# Serve frontend files
+@app.get("/app", tags=["Frontend"])
+async def serve_app():
+    """Serve the frontend application."""
+    return FileResponse("frontend/index.html")
+
+
+@app.get("/styles.css", tags=["Frontend"])
+async def serve_css():
+    """Serve CSS file."""
+    return FileResponse("frontend/styles.css")
+
+
+@app.get("/app.js", tags=["Frontend"])
+async def serve_js():
+    """Serve JavaScript file."""
+    return FileResponse("frontend/app.js")
 
 
 @app.exception_handler(Exception)
@@ -121,25 +113,6 @@ async def global_exception_handler(request: Request, exc: Exception):
         }
     )
 
-<<<<<<< HEAD
-=======
-@app.get("/app", tags=["Frontend"])
-async def serve_app():
-    """Serve the frontend application."""
-    return FileResponse("frontend/index.html")
-
-
-@app.get("/styles.css", tags=["Frontend"])
-async def serve_css():
-    """Serve CSS file."""
-    return FileResponse("frontend/styles.css")
-
-
-@app.get("/app.js", tags=["Frontend"])
-async def serve_js():
-    """Serve JavaScript file."""
-    return FileResponse("frontend/app.js")
->>>>>>> efefeeb (Working API + Frontend)
 
 if __name__ == "__main__":
     import uvicorn

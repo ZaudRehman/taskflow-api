@@ -1,22 +1,10 @@
-<<<<<<< HEAD
-from passlib.context import CryptContext
-=======
 import bcrypt
->>>>>>> efefeeb (Working API + Frontend)
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from config.settings import settings
 from typing import Optional, Dict
 from uuid import UUID
 
-<<<<<<< HEAD
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-
-def hash_password(password: str) -> str:
-    """Hash a password using bcrypt."""
-    return pwd_context.hash(password)
-=======
 
 def hash_password(password: str) -> str:
     """Hash a password using bcrypt."""
@@ -33,14 +21,10 @@ def hash_password(password: str) -> str:
     
     # Return as string
     return hashed.decode('utf-8')
->>>>>>> efefeeb (Working API + Frontend)
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verify a password against its hash."""
-<<<<<<< HEAD
-    return pwd_context.verify(plain_password, hashed_password)
-=======
     # Convert to bytes
     password_bytes = plain_password.encode('utf-8')
     
@@ -52,7 +36,6 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     
     # Verify
     return bcrypt.checkpw(password_bytes, hashed_bytes)
->>>>>>> efefeeb (Working API + Frontend)
 
 
 def create_access_token(data: Dict, expires_delta: Optional[timedelta] = None) -> str:

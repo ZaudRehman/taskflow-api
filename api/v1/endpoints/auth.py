@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-from fastapi import APIRouter, Depends, HTTPException, status
-=======
 from fastapi import APIRouter, Depends, HTTPException, status, Request
->>>>>>> efefeeb (Working API + Frontend)
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from database.session import get_db
@@ -18,26 +14,16 @@ from core.security import (
 )
 from core.exceptions import ConflictException, AuthenticationException
 from config.settings import settings
-<<<<<<< HEAD
-from slowapi import Limiter
-from slowapi.util import get_remote_address
-
-router = APIRouter()
-limiter = Limiter(key_func=get_remote_address)
-=======
 from utils.rate_limiter import limiter
 
+
 router = APIRouter()
->>>>>>> efefeeb (Working API + Frontend)
 
 
 @router.post("/register", response_model=dict, status_code=status.HTTP_201_CREATED)
 @limiter.limit(f"{settings.LOGIN_RATE_LIMIT}/hour")
 async def register(
-<<<<<<< HEAD
-=======
-    request: Request,  # ADD THIS PARAMETER
->>>>>>> efefeeb (Working API + Frontend)
+    request: Request,
     user_data: UserCreate,
     db: AsyncSession = Depends(get_db)
 ):
@@ -76,10 +62,7 @@ async def register(
 @router.post("/login", response_model=TokenResponse)
 @limiter.limit(f"{settings.LOGIN_RATE_LIMIT}/15 minutes")
 async def login(
-<<<<<<< HEAD
-=======
-    request: Request,  # ADD THIS PARAMETER
->>>>>>> efefeeb (Working API + Frontend)
+    request: Request,
     login_data: LoginRequest,
     db: AsyncSession = Depends(get_db)
 ):

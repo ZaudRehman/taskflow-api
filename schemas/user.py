@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-from pydantic import BaseModel, EmailStr, Field, ConfigDict
-=======
 from pydantic import BaseModel, EmailStr, Field, ConfigDict, field_validator
->>>>>>> efefeeb (Working API + Frontend)
 from uuid import UUID
 from datetime import datetime
 from typing import Optional
@@ -17,8 +13,6 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str = Field(..., min_length=8, max_length=100)
-<<<<<<< HEAD
-=======
     
     @field_validator('password')
     @classmethod
@@ -33,7 +27,6 @@ class UserCreate(UserBase):
         if not any(char in '!@#$%^&*()_+-=[]{}|;:,.<>?' for char in v):
             raise ValueError('Password must contain at least one special character')
         return v
->>>>>>> efefeeb (Working API + Frontend)
 
 
 class UserResponse(UserBase):
