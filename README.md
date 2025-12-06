@@ -646,7 +646,7 @@ Distributed under the [**MIT License**](LICENSE). See `LICENSE` file for more in
 
 ## 📧 Contact
 
-**Zaud Rehman** - [@RehmanZaud](https://x.com/RehmanZaud) - zaudrehman@gmail.com
+**Zaud Rehman** - [@RehmanZaud](https://x.com/RehmanZaud) · [LinkedIn](https://www.linkedin.com/in/zaud-rehman-31514a288/) · zaudrehman@gmail.com
 
 **Project Link**: [https://github.com/ZaudRehman/taskflow-api](https://github.com/ZaudRehman/taskflow-api)
 
