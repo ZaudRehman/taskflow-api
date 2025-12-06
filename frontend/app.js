@@ -1,5 +1,4 @@
 // API Configuration
-// API Configuration
 const API_BASE_URL = window.location.hostname === 'localhost' 
     ? 'http://127.0.0.1:8000/api/v1'
     : `${window.location.origin}/api/v1`;

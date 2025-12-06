@@ -10,6 +10,7 @@ from database.session import engine
 from utils.rate_limiter import limiter
 import logging
 from datetime import datetime
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
