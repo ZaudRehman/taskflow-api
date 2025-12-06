@@ -16,4 +16,3 @@ slowapi
 pytest
 pytest-asyncio
 httpx
-os
